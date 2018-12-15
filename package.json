@@ -1,0 +1,10 @@
+{
+  "name": "sogmi-donation-app-frontend",
+  "version": "0.0.1",
+  "description": "Front-end for Sogmi's donation web app. The app turns a tablet into a self serving donation kiosk. Payment integration is done with Square POS who also stores donor information",
+  "dependencies": {
+    "bulma": "^0.7.2",
+    "concurrently": "^4.1.0",
+    "node-sass": "^4.11.0"
+  }
+}
