@@ -3,8 +3,19 @@
   "version": "0.0.1",
   "description": "Front-end for Sogmi's donation web app. The app turns a tablet into a self serving donation kiosk. Payment integration is done with Square POS who also stores donor information",
   "dependencies": {
+    "browserify": "^16.2.3",
     "bulma": "^0.7.2",
     "concurrently": "^4.1.0",
-    "node-sass": "^4.11.0"
-  }
+    "live-server": "^1.2.1",
+    "node-sass": "^4.11.0",
+    "request": "^2.88.0",
+    "watchify": "^3.11.0"
+  },
+  "scripts": {
+    "start": "concurrently -k \"npm run css-watch\" \"node dev-server\" \"npm run browsify-watch\"",
+    "css-watch": "node-sass --watch styles/main.scss -o public/static/css/",
+    "http-server": "http-server ./public -p 3000 -S",
+    "browsify-watch": " watchify ./javascript/main.js -o ./public/static/bundle.js -v"
+  },
+  "devDependencies": {}
 }

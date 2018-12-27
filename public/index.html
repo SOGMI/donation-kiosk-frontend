@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.6.1/js/all.js" integrity="sha384-R5JkiUweZpJjELPWqttAYmYM1P3SNEJRM6ecTQF05pFFtxmCO+Y1CiUhvuDzgSVZ" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- loading screen -->
+    <section id="loadingScreen" class="appScreen flexColumn loadingScreen currentScreen">
+        <div class="container centerText">
+            <div class="lds-dual-ring"></div>
+        </div>
+    </section>
+
+    <!-- welcome screen -->
+    <section id="welcomeScreen" class="appScreen flexColumn">
+        <div class="container centerText">
+            <h1 class="welcomeText">
+                <div class="welcome">Welcome</div>
+                <div class="underWelcome">to the SOGMI donation station</div>        
+            </h1>
+            <div class="touchMessage"><i class="far fa-hand-point-up"></i> Touch to Start</div>
+        </div>
+    </section>
+
+    <!-- phone form -->
+    <section id="phoneScreen" class="appScreen flexColumn">
+        <div class="container centerText">
+            <h1 class="title">
+                Phone Screen
+            </h1>
+            <form id="phoneNumberForm" class="form">
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input class="input is-large" autocomplete="off" name="phoneNumber" id="customerPhoneNumber" placeholder="Enter Phone Number" pattern="[0-9]{10}" title="Input your 10 digit phone number including the area code" type="tel" required>
+                        <span class="icon is-right">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                    </div>
+                </div>
+                <input class="button is-primary is-large" type="submit" value="Continue">
+            </form>
+        </div>
+    </section>
+
+    <!-- identity confirmation popup -->
+    <section id="confirmIdentityScreen" class="appScreen flexColumn centerText">
+        <div class="container">
+            <h1 class="title">Please confirm that the information below is correct</h1>
+            <h2 class="subtitle" id="customerInfo"></h2>
+            <button id="confirmIdentityButton" class="button is-success">Confirm</button>
+            <button class="button is-link updateInfoButton">Update Info</button>
+            <button class="button is-danger appResetButton">Cancel</button>
+        </div>
+    </section>
+
+    <!-- new customer form -->
+    <section id="newCustomerScreen" class="appScreen flexColumn centerText">
+        <div class="container">
+            <h1 class="title">Phone number <span id="newCustomerPhoneNumber"></span> not found.</h1>
+            <div class="subtitle">Could you tell us a little more about yourself?</div>
+            <form id="newCustomerForm" class="form">
+                <div class="field columns">
+                    <div class="column">
+                        <div class="control has-icons-left">
+                            <input class="input is-large" type="text" autocomplete="off" name="firstName" id="customerFirstName" placeholder="First Name">
+                            <span class="icon is-left">
+                                <i class="fas fa-id-card"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="control has-icons-left">
+                            <input class="input is-large" type="text" autocomplete="off" name="lastName" id="customerLastName" placeholder="Last Name">
+                            <span class="icon is-left">
+                                <i class="fas fa-id-card"></i>
+                            </span>
+                        </div>     
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input class="input is-large" type="email" autocomplete="off" name="emailAddress" id="customerEmailAddress" placeholder="Email Address">
+                        <span class="icon is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                </div>
+                <input class="button is-success is-large" type="submit" value="Continue">
+            </form>
+        </div>
+    </section>
+    
+    <!-- Choose Donation Type -->
+    <section id="chooseDonationType" class="appScreen flexColumn centerText hasCustInfo">
+        <div class="container">
+            <h1 class="title">Select an Option</h1>
+            <div class="columns donationOptions">
+                <div class="column">
+                    <div class="card" data-option="one-time">
+                        <div class="card-content">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <div class="title">
+                                One Time Donation
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                <div class="column">
+                    <div class="card" data-option="recurring">
+                        <div class="card-content">
+                            <i class="fas fa-sync"></i>
+                            <div class="title">
+                                Recurring Donation
+                            </div>
+                        </div>
+                    </div>               
+                </div>
+            </div>
+        </div>
+        <div class="currentCustomerInformation leftText">
+            <div class="columns is-mobile">
+                <div class="column is-narrow">
+                    <h2 class="title">Donor Info</h2>
+                    <button class="button is-primary is-small updateInfoButton">Update Information</button>
+                </div>
+                <div class="column">
+                    <div><strong>Name:</strong> <span class="custName"></span></div>
+                    <div><strong>Email:</strong> <span class="custEmail"></span></div>
+                    <div><strong>Phone:</strong> <span class="custPhone"></span></div>            
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Choose donation amount -->
+    <section id="chooseDonationAmount" class="appScreen flexColumn centerText hasCustInfo">
+        <div class="container">
+            <h1 class="title">
+                How much do you want to give?
+            </h1>
+            <div class="field">
+                <div class="columns is-mobile is-1 is-multiline control amountRadio">
+                    <div class="column">
+                        <input type="radio" name="amount" id="amount25" value="25">
+                        <label for="amount25">$25</label>        
+                    </div>
+                    <div class="column">
+                        <input type="radio" name="amount" id="amount50" value="50">
+                        <label for="amount50">$50</label>        
+                    </div>
+                    <div class="column">
+                        <input type="radio" name="amount" id="amount100" value="100">
+                        <label for="amount100">$100</label>        
+                    </div>
+                    <div class="column">
+                        <input type="radio" name="amount" id="amount250" value="250">
+                        <label for="amount250">$250</label>        
+                    </div>
+                    <div class="column">
+                        <input type="radio" name="amount" id="amount500" value="500">
+                        <label for="amount500">$500</label>        
+                    </div>
+                    <div class="column is-full">
+                        <input type="radio" name="amount" id="amountCustom" value="custom">
+                        <label id="customAmountTrigger" for="amountCustom">Custom</label>
+                    </div>
+                </div>
+            </div>
+            <form>
+                <div class="field is-hidden">
+                    <input id="donationAmount" name="amount" type="number" required>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input class="button is-success is-large" type="submit" value="Pay With Card">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Error Screen -->
+    <section id="errorScreen" class="appScreen flexColumn centerText">
+        <div class="container">
+            <h1 class="title">An Error Has Occurred</h1>
+            <div class="subtitle" id="errorMessage"></div>
+            <button id="errorButton" class="button appResetButton">Start Over</button>
+        </div>
+    </section>
+    <div class="background">
+        <div class="backgroundLogo"></div>
+    </div>
+    <script src="/static/bundle.js"></script>
+</body>
+</html>
