@@ -300,7 +300,7 @@ function oneTimePayment(donation, squareId){
     else {
         transactionTotal = donation * 100
     }
-    let tenderTypes = `com.squareup.pos.TENDER_CARD, com.squareup.pos.TENDER_CARD_ON_FILE, com.squareup.pos.TENDER_CASH, com.squareup.pos.TENDER_OTHER`
+    let tenderTypes = `com.squareup.pos.TENDER_CARD, com.squareup.pos.TENDER_CARD_ON_FILE`
 
     var posUrl =
     "intent:#Intent;" +
