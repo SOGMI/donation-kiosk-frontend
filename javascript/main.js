@@ -1,6 +1,7 @@
 
 const request = require("request");
-const serverBaseUrl = 'http://localhost:8000'
+const serverBaseUrl = 'https://kiosk-app-v1.sogmi.net'
+const appid = 'sq0idp-V9fXKuFNDTqGuiN4rAcThQ'
 
 // cuurent customer object
 let currentCust = {}
@@ -11,24 +12,32 @@ let customerList = [];
 let customerExists = false
 let recurringDonation = false
 
-
 // declare all app screens
 let allScreens = document.querySelectorAll(".appScreen");
 let welcomeScreen = document.querySelector("#welcomeScreen");
 let phoneScreen = document.querySelector("#phoneScreen");
 let newCustomerScreen = document.querySelector("#newCustomerScreen");
+let updateInfoScreen = document.querySelector("#updateCustomerScreen")
 let confirmIndentityScreen = document.querySelector("#confirmIdentityScreen")
 let errorScreen = document.querySelector("#errorScreen")
 let chooseDonationType = document.querySelector("#chooseDonationType")
 let chooseDonationAmount = document.querySelector("#chooseDonationAmount")
 
-// reset buttons
+/////// General Buttons ////////
 let resetButtons = document.querySelectorAll(".appResetButton")
 let updateInfoButtons = document.querySelectorAll(".updateInfoButton");
 
+// refresh page whenever clicking a "reset button"
 for(let i = 0; i < resetButtons.length; i++){
     resetButtons[i].addEventListener("click", function(){
         reset();
+    })
+}
+
+// show update info screen whenever clicking an "update info button"
+for(let i=0; i < updateInfoButtons.length[i]; i++){
+    updateInfoButtons[i].addEventListener("click", function(){
+        showUpdateInfo();
     })
 }
 
@@ -43,6 +52,7 @@ for(let i = 0; i < forms.length; i++){
 
 ///// SCREEN SWITCHING ///////
 
+// general hide screen / show screen function
 function hideScreens(classToShow){
     for(let i = 0; i < allScreens.length; i++){
         // the class "currentScreen is used to show the current screen"
@@ -84,9 +94,51 @@ function showConfirmInformation(person){
     hideScreens(confirmIndentityScreen);
     document.querySelector("#customerInfo").innerHTML = person.firstName + " " + person.lastName;
     let confirmIdentityButton = document.querySelector("#confirmIdentityButton");
+    let updateInfoButton = document.querySelector(".updateInfoButton")
+    
+    //remove event listeners
+    confirmIdentityButton.removeEventListener("click", function(){
+        currentCust = person
+        showChooseDonationType()
+    })
+    updateInfoButton.removeEventListener("click", function(){
+        showUpdateInfo(person)
+    })
+
+    //add event listeners
     confirmIdentityButton.addEventListener("click", function(){
         currentCust = person
         showChooseDonationType()
+    })
+    updateInfoButton.addEventListener("click", function(){
+        showUpdateInfo(person)
+    })
+}
+
+function showUpdateInfo(person){
+    hideScreens(updateInfoScreen);
+    let custPhone
+    if(person.phoneNumber){
+        custPhone = person.phoneNumber.replace(" ", "");
+        custPhone = custPhone.replace("-", "");
+        custPhone = custPhone.replace("(", "");
+        custPhone = custPhone.replace(")", "");
+    }
+
+    let firstName = document.getElementById("updateFirstName")
+    let lastName = document.getElementById("updateLastName")
+    let email = document.getElementById("updateEmailAddress")
+    let phone = document.getElementById("updatePhoneNumber")
+
+    firstName.value = person.firstName;
+    lastName.value = person.lastName;
+    email.value = person.emailAddress;
+    phone.value = Number(custPhone);
+
+    let updateCustomerForm = document.querySelector("#updateCustomerForm");
+    updateCustomerForm.addEventListener("submit", function(){
+        console.log(`updating customer: ${person.squareId}\nname: ${firstName.value} ${lastName.value}`)
+        updateCustomer(person.squareId, firstName.value, lastName.value, email.value, phone.value)
     })
 }
 
@@ -97,17 +149,27 @@ function showErrorScreen(error){
     }
 }
 
+// donation option screen
+let donationOptions = document.querySelectorAll(".donationOptions .card")
+for(let i = 0; i < donationOptions.length; i++){
+    let option = donationOptions[i].getAttribute("data-option")
+    donationOptions[i].addEventListener("click", function(){
+        showChooseDonationAmount(option)
+    })
+}
+
 function showChooseDonationType(){
     hideScreens(chooseDonationType);
     console.log(currentCust)
     displayCustInformation()
-    let donationOptions = document.querySelectorAll(".donationOptions .card")
-    for(let i = 0; i < donationOptions.length; i++){
-        let option = donationOptions[i].getAttribute("data-option")
-        donationOptions[i].addEventListener("click", function(){
-            showChooseDonationAmount(option)
-        })
-    }
+}
+
+let amountButtons = document.querySelectorAll(".donationAmountRadio input")
+console.log(amountButtons)
+for(let i = 0; i < amountButtons.length; i++){
+    amountButtons[i].addEventListener("click", function(){
+        setDonationAmount(amountButtons[i].value)
+    })
 }
 
 function showChooseDonationAmount(type) {
@@ -139,16 +201,7 @@ function displayCustInformation(){
 }
 
 function reset(){
-    currentCust = {};
-    customerList = [];
-    currentCustIndex = null;
-    customerExists = false;
-    let inputs = document.querySelectorAll(".input");
-    for(let i = 0; i < inputs.length; i++){
-        inputs[i].value = null;
-    }
-    loadingAnimation();
-    init();
+    location.reload();
 }
 
 
@@ -197,6 +250,53 @@ function searchByPhone(phone) {
 
 // confirm identity
 
+// set donation form
+let oneTimeForm = document.querySelector("#oneTimePaymentForm")
+let customAmountInput = document.querySelector("#customAmountInput")
+
+customAmountInput.addEventListener("keyup", function(){
+    donationAmount.value = customAmountInput.value
+})
+customAmountInput.addEventListener("keydown", function(){
+    donationAmount.value = customAmountInput.value
+})
+
+oneTimeForm.addEventListener("submit", function(){
+    oneTimePayment(donationAmount.value, currentCust.squareId)
+})
+
+function setDonationAmount(amount){
+    let donationAmount = document.querySelector("#donationAmount")
+    let customAmount = document.querySelector("#customAmount");
+
+    switch(amount) {
+        case 'custom':
+            customAmount.classList.remove("is-hidden")
+            break;
+        default:
+            customAmount.classList.add("is-hidden")
+            donationAmount.value = Number(amount)
+            break;
+    }
+
+}
+
+// process one time payment
+function oneTimePayment(donation, squareId){
+    let url = `intent:#Intent;
+    action=com.squareup.pos.action.CHARGE;
+    package=com.squareup;
+    S.browser_fallback_url=https://www.sogmi.org;
+    S.com.squareup.pos.WEB_CALLBACK_URI=http://localhost:3000;
+    S.com.squareup.pos.CLIENT_ID=${appid};
+    S.com.squareup.pos.API_VERSION=v2.0;
+    i.com.squareup.pos.TOTAL_AMOUNT=${donation};
+    S.com.squareup.pos.CURRENCY_CODE=USD;
+    S.com.squareup.pos.TENDER_TYPES=com.squareup.pos.TENDER_CARD;
+    end`
+    console.log(url)
+    window.open(url)
+}
 
 // new customer
 let newCustForm = document.querySelector("#newCustomerForm")
@@ -241,10 +341,51 @@ newCustForm.addEventListener("submit", function(){
             showChooseDonationType()
         }
         else {
-            console.log(response)
+            showErrorScreen(response)
         }
     })
 })
+
+//update customer
+function updateCustomer(id, firstName, lastName, email, phone) {
+    let isPassing = false
+    return new Promise(function(resolve, reject){
+        loadingAnimation();
+        request.post(`${serverBaseUrl}/customers/update/`, {form:{
+            squareId: id,
+            firstName: firstName,
+            lastName: lastName,
+            emailAddress: email,
+            phoneNumber: phone
+        }},
+        function(err, res, body){
+            if(err){
+                reject(err)
+            }
+            else{
+                isPassing = true;
+                resolve(body);
+            }
+        })
+    }).then(function(response){
+        if(isPassing){
+            data = JSON.parse(response);
+            let cust = {
+                squareId: data.customer.id,
+                firstName: data.customer.given_name,
+                lastName: data.customer.family_name,
+                emailAddress: data.customer.email_address,
+                phoneNumber: data.customer.phone_number
+            }
+            currentCust = {}
+            showConfirmInformation(cust)
+        }
+        else {
+            showErrorScreen(response)
+        }
+    })
+}
+
 
 /////// INITIALIZE APP /////////
 function init(){

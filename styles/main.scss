@@ -150,29 +150,15 @@ body {
     margin: 0 auto;
     max-width: 800px;
 }
-  
-.currentCustomerInformation {
-    position: fixed;
-    height: 110px;
-    font-size: 12px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: auto;
-    padding: 20px;
-    background: white;
-    color: $text;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    .title {
-        color: inherit;
-        font-size: 2em;
-        margin-bottom: 0.5em;
-        margin-right: 1em;
-    }
-    strong {
-        color: inherit;
 
-    }
+.currentCustomerInformation {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.438);
+    padding: 15px;
+    margin: 0 auto;
+    margin-bottom: 5em;
+    margin-top: -5em;
+    border-radius: 5px;
 }
 
 .donationOptions {
@@ -198,7 +184,7 @@ body {
     }
 }
 
-.amountRadio {
+.donationAmountRadio {
     label {
         display: block;
         padding: 20px;

@@ -94,10 +94,65 @@
             </form>
         </div>
     </section>
+
+    <!-- update customer form -->
+    <section id="updateCustomerScreen" class="appScreen flexColumn">
+        <div class="container">
+            <form class="form" id="updateCustomerForm">
+                <div class="columns is-multiline">
+                    <div class="field column">
+                        <label for="updateFirstName">First Name:</label>
+                        <div class="control has-icons-left">
+                            <input class="input is-large" required autocomplete="off" type="text" name="firstName" id="updateFirstName" placeholder="Enter First Name">
+                            <span class="icon is-left">
+                                <i class="far fa-id-card"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="field column">
+                        <label for="updateLastName">Last Name:</label>
+                        <div class="control has-icons-left">
+                            <input class="input is-large" required autocomplete="off" type="text" name="lastName" id="updateLastName" placeholder="Enter Last Name">
+                            <span class="icon is-left">
+                                <i class="far fa-id-card"></i>
+                            </span>
+                        </div>
+                    </div>         
+                
+                    <div class="field column is-full">
+                        <label for="updateEmailAddress">Email Address:</label>
+                        <div class="control has-icons-left">
+                            <input class="input is-large" required autocomplete="off" type="email" name="emailAddress" placeholder="Enter Email Address" id="updateEmailAddress">
+                            <span class="icon is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="field column is-full">
+                        <label for="updatePhoneNumber">Phone Number:</label>
+                        <div class="control has-icons-left">
+                            <input class="input is-large" required autocomplete="off" type="tel" name="phoneNumber" pattern="[0-9]{10}" title="Enter your 10 digit phone number including the area code" id="updatePhoneNumber" placeholder="Enter Phone Number">
+                            <span class="icon is-left">
+                                <i class="fas fa-phone"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="field column">
+                        <div class="control">
+                            <button class="button is-success is-large" type="submit" value="submit">Submit Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
     
     <!-- Choose Donation Type -->
     <section id="chooseDonationType" class="appScreen flexColumn centerText hasCustInfo">
         <div class="container">
+            <div class="currentCustomerInformation">
+                <h2 class="subtitle"><strong>Current Donor:</strong> <span class="custName"></span></h2>    
+            </div>
             <h1 class="title">Select an Option</h1>
             <div class="columns donationOptions">
                 <div class="column">
@@ -122,30 +177,19 @@
                 </div>
             </div>
         </div>
-        <div class="currentCustomerInformation leftText">
-            <div class="columns is-mobile">
-                <div class="column is-narrow">
-                    <h2 class="title">Donor Info</h2>
-                    <button class="button is-primary is-small updateInfoButton">Update Information</button>
-                </div>
-                <div class="column">
-                    <div><strong>Name:</strong> <span class="custName"></span></div>
-                    <div><strong>Email:</strong> <span class="custEmail"></span></div>
-                    <div><strong>Phone:</strong> <span class="custPhone"></span></div>            
-                </div>
-            </div>
-            
-        </div>
     </section>
 
     <!-- Choose donation amount -->
     <section id="chooseDonationAmount" class="appScreen flexColumn centerText hasCustInfo">
         <div class="container">
+            <div class="currentCustomerInformation">
+                <h2 class="subtitle"><strong>Current Donor:</strong> <span class="custName"></span></h2>    
+            </div>
             <h1 class="title">
                 How much do you want to give?
             </h1>
-            <div class="field">
-                <div class="columns is-mobile is-1 is-multiline control amountRadio">
+            <div class="form" style="margin-bottom:30px">
+                <div class="columns is-mobile is-1 is-multiline control donationAmountRadio">
                     <div class="column">
                         <input type="radio" name="amount" id="amount25" value="25">
                         <label for="amount25">$25</label>        
@@ -171,15 +215,24 @@
                         <label id="customAmountTrigger" for="amountCustom">Custom</label>
                     </div>
                 </div>
+                <div id="customAmount" class="field is-hidden">
+                    <div class="control">
+                        <label for="customAmountInput">Enter Donation Amount</label>
+                        <input type="number" name="customAmount" id="customAmountInput">
+                    </div>
+                </div>
             </div>
-            <form>
+            <form id="oneTimePaymentForm" class="form">
                 <div class="field is-hidden">
                     <input id="donationAmount" name="amount" type="number" required>
                 </div>
                 <div class="field">
                     <div class="control">
-                        <input class="button is-success is-large" type="submit" value="Pay With Card">
+                        <button type="submit" value="Pay With Card" class="button is-success is-large"><i class="fas fa-credit-card"></i> &nbsp; Pay With Card</button>
+                        <div class="button appResetButton is-large is-text">Cancel</div>
                     </div>
+                    <div class="control">
+                    </div>                
                 </div>
             </form>
         </div>

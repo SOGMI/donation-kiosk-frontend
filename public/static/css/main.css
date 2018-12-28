@@ -6872,24 +6872,13 @@ body {
   max-width: 800px; }
 
 .currentCustomerInformation {
-  position: fixed;
-  height: 110px;
-  font-size: 12px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: auto;
-  padding: 20px;
-  background: white;
-  color: #333333;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); }
-  .currentCustomerInformation .title {
-    color: inherit;
-    font-size: 2em;
-    margin-bottom: 0.5em;
-    margin-right: 1em; }
-  .currentCustomerInformation strong {
-    color: inherit; }
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.438);
+  padding: 15px;
+  margin: 0 auto;
+  margin-bottom: 5em;
+  margin-top: -5em;
+  border-radius: 5px; }
 
 .donationOptions {
   max-width: 800px;
@@ -6910,16 +6899,16 @@ body {
       height: 5em;
       margin-bottom: 2em; }
 
-.amountRadio label {
+.donationAmountRadio label {
   display: block;
   padding: 20px;
   background: white;
   border-radius: 5px;
   font-weight: bold; }
 
-.amountRadio input {
+.donationAmountRadio input {
   display: none; }
 
-.amountRadio input:checked + label {
+.donationAmountRadio input:checked + label {
   background: #1e4d68;
   color: white; }
