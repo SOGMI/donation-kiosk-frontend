@@ -284,19 +284,27 @@ function setDonationAmount(amount){
 
 // process one time payment
 function oneTimePayment(donation, squareId){
-    let url = `intent:#Intent;
-    action=com.squareup.pos.action.CHARGE;
-    package=com.squareup;
-    S.browser_fallback_url=https://www.sogmi.org;
-    S.com.squareup.pos.WEB_CALLBACK_URI=http://localhost:3000;
-    S.com.squareup.pos.CLIENT_ID=${appid};
-    S.com.squareup.pos.API_VERSION=v2.0;
-    i.com.squareup.pos.TOTAL_AMOUNT=${donation};
-    S.com.squareup.pos.CURRENCY_CODE=USD;
-    S.com.squareup.pos.TENDER_TYPES=com.squareup.pos.TENDER_CARD;
-    end`
-    console.log(url)
-    window.open(url)
+    let callbackUrl = 'https://kiosk.sogmi.org'
+    let applicationId = appid
+    let currencyCode = "USD"
+    let sdkVersion = "v2.0"
+    let transactionTotal = donation
+    let tenderTypes = `com.squareup.pos.TENDER_CARD, com.squareup.pos.TENDER_CARD_ON_FILE, com.squareup.pos.TENDER_CASH, com.squareup.pos.TENDER_OTHER`
+
+    var posUrl =
+    "intent:#Intent;" +
+    "action=com.squareup.pos.action.CHARGE;" +
+    "package=com.squareup;" +
+    "S.com.squareup.pos.WEB_CALLBACK_URI=" + callbackUrl + ";" +
+    "S.com.squareup.pos.CLIENT_ID=" + applicationId + ";" +
+    "S.com.squareup.pos.API_VERSION=" + sdkVersion + ";" +
+    "i.com.squareup.pos.TOTAL_AMOUNT=" + transactionTotal + ";" +
+    "S.com.squareup.pos.CURRENCY_CODE=" + currencyCode + ";" +
+    "S.com.squareup.pos.TENDER_TYPES=" + tenderTypes + ";" +
+    "end";
+
+    console.log(posUrl)
+    window.open(posUrl)
 }
 
 // new customer
