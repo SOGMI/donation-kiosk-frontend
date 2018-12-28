@@ -254,6 +254,10 @@ function searchByPhone(phone) {
 let oneTimeForm = document.querySelector("#oneTimePaymentForm")
 let customAmountInput = document.querySelector("#customAmountInput")
 
+let customAmount = document.querySelector("#customAmount");
+let customDonation = false
+
+
 customAmountInput.addEventListener("keyup", function(){
     donationAmount.value = customAmountInput.value
 })
@@ -267,15 +271,15 @@ oneTimeForm.addEventListener("submit", function(){
 
 function setDonationAmount(amount){
     let donationAmount = document.querySelector("#donationAmount")
-    let customAmount = document.querySelector("#customAmount");
-
     switch(amount) {
         case 'custom':
             customAmount.classList.remove("is-hidden")
+            customDonation = true
             break;
         default:
             customAmount.classList.add("is-hidden")
             donationAmount.value = Number(amount)
+            customDonation = false
             break;
     }
 
@@ -283,11 +287,18 @@ function setDonationAmount(amount){
 
 // process one time payment
 function oneTimePayment(donation, squareId){
+    
     let callbackUrl = 'https://kiosk.sogmi.org'
     let applicationId = appid
     let currencyCode = "USD"
     let sdkVersion = "v2.0"
-    let transactionTotal = donation * 100
+    let transactionTotal
+    if (customDonation){
+        transactionTotal = Number(customAmountInput.value) * 100
+    }
+    else {
+        transactionTotal = donation * 100
+    }
     let tenderTypes = `com.squareup.pos.TENDER_CARD, com.squareup.pos.TENDER_CARD_ON_FILE, com.squareup.pos.TENDER_CASH, com.squareup.pos.TENDER_OTHER`
 
     var posUrl =
