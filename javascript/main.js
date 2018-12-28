@@ -302,7 +302,7 @@ function oneTimePayment(donation, squareId){
     let tenderTypes = `com.squareup.pos.TENDER_CARD, com.squareup.pos.TENDER_CARD_ON_FILE`
 
     var posUrl =
-    "intent:#Intent;" +
+    "intent://squareCheckout/#Intent;" +
     "action=com.squareup.pos.action.CHARGE;" +
     "package=com.squareup;" +
     "S.com.squareup.pos.WEB_CALLBACK_URI=" + callbackUrl + ";" +
