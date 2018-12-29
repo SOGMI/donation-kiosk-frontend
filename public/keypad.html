@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Keypad</title>
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.6.1/js/all.js" integrity="sha384-R5JkiUweZpJjELPWqttAYmYM1P3SNEJRM6ecTQF05pFFtxmCO+Y1CiUhvuDzgSVZ" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <section class="appScreen currentScreen flexColumn">
+      <div class="container" style="width: 100%">
+        <div class="columns is-tablet phoneColumns">
+          <div class="column is-flexible centerText" style="display: flex; display: -webkit-flex; flex-direction: column; justify-content: center; padding: 20px">
+            <div class="column is-narrow">
+                <h1 class="title">Enter Your Phone Number</h1>
+                <div class="columns is-mobile is-gapless phoneDigits">
+                    <div class="column is-narrow">
+                        <span>(</span><span class="phoneDigit">2</span>
+                    </div>
+                    <div class="column is-narrow">
+                        <span class="phoneDigit">1</span>
+                    </div>
+                    <div class="column is-narrow">
+                        <span class="phoneDigit">0</span><span>)</span>
+                    </div>
+                    <div class="column is-narrow">
+                        <span class="phoneDigit">3</span>
+                    </div>
+                    <div class="column is-narrow">
+                        <span class="phoneDigit">1</span>
+                    </div>
+                    <div class="column is-narrow">
+                        <span class="phoneDigit">6</span><span>-</span>
+                    </div>
+                    <div class="column is-narrow">
+                        <span class="phoneDigit">3</span>
+                    </div>
+                    <div class="column is-narrow">
+                        <span class="phoneDigit">1</span>
+                    </div>
+                    <div class="column is-narrow">
+                        <span class="phoneDigit">2</span>
+                    </div>
+                    <div class="column is-narrow">
+                        <span class="phoneDigit">9</span>
+                    </div>
+                    <div class="column is-narrow">
+                        <div id="deleteDigit"><i class="fas fa-backspace"></i></div>
+                    </div>
+                </div>        
+            </div>
+            <form id="phoneNumberForm" class="column is-flexible" class="">
+                <div class="field is-hidden">
+                    <div class="control has-icons-left">
+                        <input class="input" autocomplete="off" name="phoneNumber" id="customerPhoneNumber" placeholder="Enter Phone Number" pattern="[0-9]{10}" title="Input your 10 digit phone number including the area code" type="tel" required>
+                        <span class="icon is-right">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                    </div>
+                </div>
+                <input class="button is-success phoneSubmitButton" type="submit" value="CONTINUE">
+            </form>
+          </div>
+          <div class="column is-narrow">
+            <div class="kBox">
+              <div class="columns is-mobile is-multiline is-grouped-centered">
+                <div class="column is-one-third">
+                  <button class="kNumber">1</button>
+                </div>
+                <div class="column is-one-third">
+                  <button class="kNumber">2</button>
+                </div>
+                <div class="column is-one-third">
+                  <button class="kNumber">3</button>
+                </div>
+                <div class="column is-one-third">
+                  <button class="kNumber">4</button>
+                </div>
+                <div class="column is-one-third">
+                  <button class="kNumber">5</button>
+                </div>
+                <div class="column is-one-third">
+                  <button class="kNumber">6</button>
+                </div>
+                <div class="column is-one-third">
+                  <button class="kNumber">7</button>
+                </div>
+                <div class="column is-one-third">
+                  <button class="kNumber">8</button>
+                </div>
+                <div class="column is-one-third">
+                  <button class="kNumber">9</button>
+                </div>
+                <div class="column"><button class="kNumber">0</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="background">
+        <div class="backgroundOverlay"></div>
+        <div class="backgroundLogo"></div>
+    </div>
+  </body>
+</html>

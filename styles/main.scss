@@ -4,6 +4,7 @@
 @import "../styles/partials/variables.scss";
 @import "../node_modules/bulma/bulma.sass";
 @import "../styles/partials/apptriggers.scss";
+@import "../styles/partials/keypad.scss";
 
 * {
     box-sizing: border-box;
@@ -14,14 +15,17 @@
 :root {
     font-size: 15px;
     line-height: 200%;
+    color: $text;
 }
 
 html {
-    background: #e7e7e7e3
+    background: #e7e7e7e3;
+    color: $text
 }
 
 body {
-    background: rgba(231, 231, 231, 0.89)
+    background: rgba(231, 231, 231, 0.89);
+    color: $text;
 }
 
 .background {
