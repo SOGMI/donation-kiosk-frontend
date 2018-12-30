@@ -27,6 +27,12 @@ let chooseDonationAmount = document.querySelector("#chooseDonationAmount")
 /////// General Buttons ////////
 let resetButtons = document.querySelectorAll(".appResetButton")
 let updateInfoButtons = document.querySelectorAll(".updateInfoButton");
+let confirmAnonymous = document.querySelector("#confirmAnonymous")
+
+confirmAnonymous.addEventListener("click", function(){
+    showChooseDonationAmount()
+    closeAllPopups();
+});
 
 // refresh page whenever clicking a "reset button"
 for(let i = 0; i < resetButtons.length; i++){
