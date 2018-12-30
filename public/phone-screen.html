@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <section class="appScreen currentScreen flexColumn">
+        <div class="container">
+            <div class="columns is-variable is-8">
+                <div class="column centerText">
+                    <div class="signInForm">
+                        <h2 class="title">Enter Phone Number</h2>
+                        <div class="control has-icons-right centerText">
+                            <div class="input is-large"><span id="displayPhoneNumber"></span>
+                                <div id="deleteIcon">
+                                    <i class="fas fa-backspace"></i>
+                                </div>
+                            </div>
+                            <!-- <span class="icon is-left">
+                                <i class="fas fa-phone"></i>
+                            </span> -->
+                        </div>
+                        <div class="numberKeypad">
+                            <div class="columns is-mobile is-multiline is-grouped-centered">
+                                <div class="column is-one-third">
+                                    <div class="kNumber">1</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">2</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">3</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">4</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">5</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">6</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">7</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">8</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">9</div>
+                                </div>
+                                <div class="column">
+                                    <div class="kNumber">0</div>
+                                </div>
+                                <div class="column is-full">
+                                    <form id="phoneNumberForm">
+                                        <input class="is-hidden" type="number" minlength="10" maxlength="10" name="phoneNumber" id="customerPhoneNumber">
+                                        <div id="keypadFake" class="button is-disabled is-large">Submit</div>
+                                        <button id="keypadSubmit" class="button is-success is-large is-hidden">Submit</button>
+                                    </form>
+                                </div>
+                            </div>            
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="signInForm flexColumn centerText">
+                        <button onclick="openPopup('anonymousConfirmation')" id="anonymousButton" class="button is-large is-primary">I Want To Give Anonymously</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="anonymousConfirmation" class="popupContainer">
+        <div class="popup centerText">
+            <div class="title">Are You Sure?</div>
+            <p style="margin-bottom: 2rem;">By choosing to give anonymously we will not be able to send you donation reciepts for you contributions. This includes our year end donor acknowledgement letter which can be used to claim a tax deduction.</p>
+            <button id="confirmAnonymous" class="button is-medium is-success">Confirm</button>
+            <button class="button is-medium is-danger closePopup">Cancel</button>
+        </div>
+        <div class="popupOverlay closePopup">
+
+        </div>
+    </div>
+    <div class="background">
+        <div class="backgroundLogo"></div>
+    </div>
+    <script src="/static/phone-form.js"></script>
+    <script src="/static/popup.js"></script>
+</body>
+</html>

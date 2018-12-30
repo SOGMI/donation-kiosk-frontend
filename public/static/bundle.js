@@ -93,27 +93,38 @@ function showNewCustomerScreen(phone){
 
 function showConfirmInformation(person){
     hideScreens(confirmIndentityScreen);
-    document.querySelector("#customerInfo").innerHTML = person.firstName + " " + person.lastName;
+    // show customer info
+    let contName = document.querySelector("#customerName");
+    let contPhone = document.querySelector("#customerPhone");
+    let contEmail = document.querySelector("#customerEmail");
+    let contAddress = document.querySelector("#customerAddress");
+
+    contName.innerHTML = `${person.firstName} ${person.lastName}`;
+
     let confirmIdentityButton = document.querySelector("#confirmIdentityButton");
     let updateInfoButton = document.querySelector(".updateInfoButton")
     
     //remove event listeners
     confirmIdentityButton.removeEventListener("click", function(){
         currentCust = person
-        showChooseDonationType()
+        // remove comment when recurring donations is added
+        // showChooseDonationType()
+        showChooseDonationAmount('one-time');
     })
-    updateInfoButton.removeEventListener("click", function(){
-        showUpdateInfo(person)
-    })
+    // updateInfoButton.removeEventListener("click", function(){
+    //     showUpdateInfo(person)
+    // })
 
     //add event listeners
     confirmIdentityButton.addEventListener("click", function(){
         currentCust = person
-        showChooseDonationType()
+        showChooseDonationAmount('one-time');
+        // remove comment when recurring donations is added
+        // showChooseDonationType()
     })
-    updateInfoButton.addEventListener("click", function(){
-        showUpdateInfo(person)
-    })
+    // updateInfoButton.addEventListener("click", function(){
+    //     showUpdateInfo(person)
+    // })
 }
 
 function showUpdateInfo(person){
@@ -175,6 +186,7 @@ for(let i = 0; i < amountButtons.length; i++){
 
 function showChooseDonationAmount(type) {
     hideScreens(chooseDonationAmount);
+    displayCustInformation();
     switch(type) {
         case 'one-time':
             console.log(type)

@@ -30,32 +30,97 @@
 
     <!-- phone form -->
     <section id="phoneScreen" class="appScreen flexColumn">
-        <div class="container centerText">
-            <h1 class="title">
-                Phone Screen
-            </h1>
-            <form id="phoneNumberForm" class="form">
-                <div class="field">
-                    <div class="control has-icons-left">
-                        <input class="input is-large" autocomplete="off" name="phoneNumber" id="customerPhoneNumber" placeholder="Enter Phone Number" pattern="[0-9]{10}" title="Input your 10 digit phone number including the area code" type="tel" required>
-                        <span class="icon is-right">
-                            <i class="fas fa-phone"></i>
-                        </span>
+        <div class="container">
+            <div class="columns is-variable is-8">
+                <div class="column centerText">
+                    <div class="signInForm">
+                        <h2 class="title">Enter Phone Number</h2>
+                        <div class="control has-icons-right centerText">
+                            <div class="input is-large"><span id="displayPhoneNumber"></span>
+                                <div id="deleteIcon">
+                                    <i class="fas fa-backspace"></i>
+                                </div>
+                            </div>
+                            <!-- <span class="icon is-left">
+                                <i class="fas fa-phone"></i>
+                            </span> -->
+                        </div>
+                        <div class="numberKeypad">
+                            <div class="columns is-mobile is-multiline is-grouped-centered">
+                                <div class="column is-one-third">
+                                    <div class="kNumber">1</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">2</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">3</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">4</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">5</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">6</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">7</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">8</div>
+                                </div>
+                                <div class="column is-one-third">
+                                    <div class="kNumber">9</div>
+                                </div>
+                                <div class="column">
+                                    <div class="kNumber">0</div>
+                                </div>
+                                <div class="column is-full">
+                                    <form id="phoneNumberForm">
+                                        <input class="is-hidden" type="number" minlength="10" maxlength="10" name="phoneNumber" id="customerPhoneNumber">
+                                        <div id="keypadFake" class="button is-disabled is-large">Submit</div>
+                                        <button id="keypadSubmit" class="button is-success is-large is-hidden">Submit</button>
+                                    </form>
+                                </div>
+                            </div>            
+                        </div>
                     </div>
                 </div>
-                <input class="button is-primary is-large" type="submit" value="Continue">
-            </form>
+                <div class="column">
+                    <div class="signInForm flexColumn centerText">
+                        <button onclick="openPopup('anonymousConfirmation')" id="anonymousButton" class="button is-large is-primary">I Want To Give Anonymously</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+    <div id="anonymousConfirmation" class="popupContainer">
+        <div class="popup centerText">
+            <div class="title">Are You Sure?</div>
+            <p style="margin-bottom: 2rem;">By choosing to give anonymously we will not be able to send you donation reciepts for you contributions. This includes our year end donor acknowledgement letter which can be used to claim a tax deduction.</p>
+            <button id="confirmAnonymous" class="button is-medium is-success">Confirm</button>
+            <button class="button is-medium is-danger closePopup">Cancel</button>
+        </div>
+        <div class="popupOverlay closePopup">
+
+        </div>
+    </div>
 
     <!-- identity confirmation popup -->
-    <section id="confirmIdentityScreen" class="appScreen flexColumn centerText">
+    <section id="confirmIdentityScreen" class="appScreen flexColumn currentScreen">
         <div class="container">
-            <h1 class="title">Please confirm that the information below is correct</h1>
-            <h2 class="subtitle" id="customerInfo"></h2>
-            <button id="confirmIdentityButton" class="button is-success">Confirm</button>
-            <button class="button is-link updateInfoButton">Update Info</button>
-            <button class="button is-danger appResetButton">Cancel</button>
+            <div class="identityForm">
+                <h1 class="title">Please confirm your identity</h1>
+                <p>Name: <span id="customerName"></span></p>
+                <p>Phone: <span id="customerPhone"></span></p>
+                <p>Email: <span id="customerEmail"></span></p>
+                <p>Mailing Address: <span id="customerAddress"></span></p>
+                <button id="confirmIdentityButton" class="button is-medium is-success">Confirm</button>
+                <!-- <button class="button is-medium is-link updateInfoButton">Update Info</button> -->
+                <button class="button is-medium is-danger appResetButton">Cancel</button>        
+            </div>
         </div>
     </section>
 
@@ -252,6 +317,7 @@
         <div class="backgroundLogo"></div>
     </div>
     <script src="/static/phone-form.js"></script>
+    <script src="/static/popup.js"></script>
     <script src="/static/bundle.js"></script>
 </body>
 </html>

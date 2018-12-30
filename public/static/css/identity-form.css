@@ -1,0 +1,15 @@
+.identityForm {
+  padding: 50px;
+  background: white;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 10px; }
+  .identityForm .title {
+    font-weight: bold; }
+  .identityForm p {
+    font-size: 1.2em; }
+    .identityForm p span {
+      font-weight: bold; }
+  .identityForm p:last-of-type {
+    margin-bottom: 2em; }
