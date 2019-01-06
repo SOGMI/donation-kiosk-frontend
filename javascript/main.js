@@ -105,6 +105,8 @@ function showConfirmInformation(person){
     let contAddress = document.querySelector("#customerAddress");
 
     contName.innerHTML = `${person.firstName} ${person.lastName}`;
+    contPhone.innerHTML = person.phoneNumber;
+    contEmail.innerHTML = person.emailAddress;
 
     let confirmIdentityButton = document.querySelector("#confirmIdentityButton");
     let updateInfoButton = document.querySelector(".updateInfoButton")
