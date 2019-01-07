@@ -1,25 +1,14 @@
 let phoneInput = document.getElementById("customerPhoneNumber");
-let numberPadInputs = document.querySelectorAll(".numberKeypad .kNumber")
-let deleteIcon = document.querySelector("#deleteIcon")
+// let numberPadInputs = document.querySelectorAll(".numberKeypad .kNumber")
+// let deleteIcon = document.querySelector("#deleteIcon")
 
-deleteIcon.addEventListener("click", function(){
-    deleteNumber();
+phoneInput.addEventListener("keyup", function(){
+    checkKeypad(phoneInput.value.length)
 })
 
-for(let i = 0; i < numberPadInputs.length; i++){
-    numberPadInputs[i].addEventListener("click", function(){
-        numberPadInput(this);
-    })
-}
-
-function numberPadInput(container){
-    let digit = Number(container.innerHTML)
-    if(phoneInput.value.length < 10){
-        phoneInput.value += digit;
-    }
-    checkKeypad(phoneInput.value.length);
-    displayNumber();
-}
+window.addEventListener("touchstart", function(){
+    checkKeypad(phoneInput.value.length)
+})
 
 function checkKeypad(inputLength){
     let keypadFakeBtn = document.querySelector("#keypadFake")
@@ -34,15 +23,36 @@ function checkKeypad(inputLength){
     }
 }
 
-function deleteNumber(){
-    let number = phoneInput.value;
-    number = number.slice(0, -1)
-    phoneInput.value = number;
-    checkKeypad(phoneInput.value.length);
-    displayNumber();
-}
+// deleteIcon.addEventListener("click", function(){
+//     deleteNumber();
+// })
 
-function displayNumber(){
-    let display = document.getElementById("displayPhoneNumber")
-    display.innerHTML = phoneInput.value
-}
+// for(let i = 0; i < numberPadInputs.length; i++){
+//     numberPadInputs[i].addEventListener("click", function(){
+//         numberPadInput(this);
+//     })
+// }
+
+// function numberPadInput(container){
+//     let digit = Number(container.innerHTML)
+//     if(phoneInput.value.length < 10){
+//         phoneInput.value += digit;
+//     }
+//     checkKeypad(phoneInput.value.length);
+//     displayNumber();
+// }
+
+
+
+// function deleteNumber(){
+//     let number = phoneInput.value;
+//     number = number.slice(0, -1)
+//     phoneInput.value = number;
+//     checkKeypad(phoneInput.value.length);
+//     displayNumber();
+// }
+
+// function displayNumber(){
+//     let display = document.getElementById("displayPhoneNumber")
+//     display.innerHTML = phoneInput.value
+// }

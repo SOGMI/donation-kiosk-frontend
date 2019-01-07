@@ -106,6 +106,8 @@ function showConfirmInformation(person){
     let contAddress = document.querySelector("#customerAddress");
 
     contName.innerHTML = `${person.firstName} ${person.lastName}`;
+    contPhone.innerHTML = person.phoneNumber;
+    contEmail.innerHTML = person.emailAddress;
 
     let confirmIdentityButton = document.querySelector("#confirmIdentityButton");
     let updateInfoButton = document.querySelector(".updateInfoButton")
@@ -227,21 +229,27 @@ function reset(){
 ////// FORMS ///////
 
 // phone search
-let phoneForm = document.getElementById("phoneNumberForm")
+let phoneForm = document.getElementById("phoneNumberForm");
+let phoneNumberInput = document.getElementById("customerPhoneNumber");
 
 phoneForm.addEventListener("submit", function(){
-    let customerPhoneNumber = document.querySelector("#customerPhoneNumber").value;
-    loadingAnimation();
-    return new Promise(function(resolve, reject){
-        resolve(searchByPhone(customerPhoneNumber));
-    }).then(function(){
-        if(customerExists){
-            showConfirmInformation(currentCust);
-        }
-        else {
-            showNewCustomerScreen(customerPhoneNumber)
-        }
-    })
+    let numberLength = phoneNumberInput.value.length
+    if (Number(numberLength) === 10){
+        let customerPhoneNumber = document.querySelector("#customerPhoneNumber").value;
+        loadingAnimation();
+        return new Promise(function(resolve, reject){
+            resolve(searchByPhone(customerPhoneNumber));
+        }).then(function(){
+            if(customerExists){
+                showConfirmInformation(currentCust);
+            }
+            else {
+                showNewCustomerScreen(customerPhoneNumber)
+            }
+        })    
+    } else {
+        document.getElementById("phoneError").classList.add("active")
+    }
 });
 
 function searchByPhone(phone) {
@@ -278,10 +286,10 @@ let customDonation = false
 
 
 customAmountInput.addEventListener("keyup", function(){
-    donationAmount.value = customAmountInput.value
+    donationAmount.value = Number(customAmountInput.value)
 })
 customAmountInput.addEventListener("keydown", function(){
-    donationAmount.value = customAmountInput.value
+    donationAmount.value = Number(customAmountInput.value)
 })
 
 oneTimeForm.addEventListener("submit", function(){
@@ -319,7 +327,8 @@ function oneTimePayment(donation, squareId){
         transactionTotal = donation * 100
     }
     let tenderTypes = `com.squareup.pos.TENDER_CARD, com.squareup.pos.TENDER_CARD_ON_FILE`
-
+    console.log(transactionTotal)
+    console.log(typeof(transactionTotal))
     var posUrl =
     "intent:#Intent;" +
     "action=com.squareup.pos.action.CHARGE;" +
@@ -376,7 +385,7 @@ newCustForm.addEventListener("submit", function(){
                 emailAddress: data.customer.email_address,
                 phoneNumber: data.customer.phone_number
             }
-            showChooseDonationType()
+            showChooseDonationAmount()
         }
         else {
             showErrorScreen(response)
@@ -484,6 +493,7 @@ function pushCustomers(bodyCust, bodyCursor) {
 }
 
 init();
+
 },{"request":276}],2:[function(require,module,exports){
 'use strict';
 

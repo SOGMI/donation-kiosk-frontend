@@ -12,71 +12,26 @@
 <body>
     <section class="appScreen currentScreen flexColumn">
         <div class="container">
-            <div class="columns is-variable is-8">
-                <div class="column centerText">
-                    <div class="signInForm">
-                        <h2 class="title">Enter Phone Number</h2>
-                        <div class="control has-icons-right centerText">
-                            <div class="input is-large"><span id="displayPhoneNumber"></span>
-                                <div id="deleteIcon">
-                                    <i class="fas fa-backspace"></i>
-                                </div>
-                            </div>
-                            <!-- <span class="icon is-left">
-                                <i class="fas fa-phone"></i>
-                            </span> -->
-                        </div>
-                        <div class="numberKeypad">
-                            <div class="columns is-mobile is-multiline is-grouped-centered">
-                                <div class="column is-one-third">
-                                    <div class="kNumber">1</div>
-                                </div>
-                                <div class="column is-one-third">
-                                    <div class="kNumber">2</div>
-                                </div>
-                                <div class="column is-one-third">
-                                    <div class="kNumber">3</div>
-                                </div>
-                                <div class="column is-one-third">
-                                    <div class="kNumber">4</div>
-                                </div>
-                                <div class="column is-one-third">
-                                    <div class="kNumber">5</div>
-                                </div>
-                                <div class="column is-one-third">
-                                    <div class="kNumber">6</div>
-                                </div>
-                                <div class="column is-one-third">
-                                    <div class="kNumber">7</div>
-                                </div>
-                                <div class="column is-one-third">
-                                    <div class="kNumber">8</div>
-                                </div>
-                                <div class="column is-one-third">
-                                    <div class="kNumber">9</div>
-                                </div>
-                                <div class="column">
-                                    <div class="kNumber">0</div>
-                                </div>
-                                <div class="column is-full">
-                                    <form id="phoneNumberForm">
-                                        <input class="is-hidden" type="number" minlength="10" maxlength="10" name="phoneNumber" id="customerPhoneNumber">
-                                        <div id="keypadFake" class="button is-disabled is-large">Submit</div>
-                                        <button id="keypadSubmit" class="button is-success is-large is-hidden">Submit</button>
-                                    </form>
-                                </div>
-                            </div>            
+                <form  class="form centerText" id="phoneNumberForm">
+                    <h2 class="title phoneTitle">Enter Your Phone Number</h2>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-large" placeholder="(210)111-1111" autocomplete="off" type="number" minlength="10" maxlength="10" required name="phoneNumber" id="customerPhoneNumber">
                         </div>
                     </div>
-                </div>
-                <div class="column">
-                    <div class="signInForm flexColumn centerText">
-                        <button onclick="openPopup('anonymousConfirmation')" id="anonymousButton" class="button is-large is-primary">I Want To Give Anonymously</button>
-                    </div>
-                </div>
-            </div>
+                    <!-- <div id="keypadFake" class="button is-disabled is-large veryLarge">Submit</div> -->
+                    <button id="keypadSubmit" class="button is-success is-large veryLarge">Submit</button>
+                </form>
+                <button onclick="openPopup('anonymousConfirmation')" id="anonymousButton" class="button">I Want To Give Anonymously</button>
         </div>
     </section>
+    <div id="phoneError" class="popupContainer">
+        <div clas="popup centerText">
+            <div class="title">Invalid Phone Number</div>
+            <p>Make sure to enter your full 10 digit number including the area code. (Ex. 2103967891)</p>
+        </div>
+        <div class="popupOverlay closePopup"></div>
+    </div>
     <div id="anonymousConfirmation" class="popupContainer">
         <div class="popup centerText">
             <div class="title">Are You Sure?</div>
