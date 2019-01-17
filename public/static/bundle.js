@@ -300,6 +300,10 @@ oneTimeForm.addEventListener("submit", function(){
     oneTimePayment(donationAmount.value, currentCust.squareId)
 })
 
+customAmount.addEventListener("submit", function(){
+    oneTimePayment(donationAmount.value, currentCust.squareId)
+})
+
 function setDonationAmount(amount){
     let donationAmount = document.querySelector("#donationAmount")
     switch(amount) {
