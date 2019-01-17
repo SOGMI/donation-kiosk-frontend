@@ -193,7 +193,9 @@ body {
 .donationAmountRadio {
     label {
         display: block;
-        padding: 20px;
+        padding: 0.8em;
+        font-size: 2em;
+        text-align: center;
         background: white;
         border-radius: 5px;
         font-weight: bold;
@@ -205,4 +207,25 @@ body {
         background: $primary;
         color: white;
     }
+}
+
+#customAmount label {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+}
+
+#customAmountInput {
+    background: none;
+    font-size: 1.5em;
+    padding: 1em;
+    height: auto;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid $text;
+    box-shadow: none;
+    text-align: center;
+    border-radius: 0px;
 }

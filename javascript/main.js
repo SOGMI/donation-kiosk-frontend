@@ -210,7 +210,11 @@ function displayCustInformation(){
     let custPhone = document.querySelectorAll(".currentCustomerInformation .custPhone")
 
     for(let i = 0; i < custName.length; i++) {
-        custName[i].innerHTML = `${currentCust.firstName} ${currentCust.lastName}`
+        if (currentCust.firstName) {
+            custName[i].innerHTML = `${currentCust.firstName} ${currentCust.lastName}`
+        } else {
+            custName[i].innerHTML = `Anonymous`
+        }
     }
     for(let i = 0; i < custEmail.length; i++) {
         custEmail[i].innerHTML = `${currentCust.emailAddress}`
@@ -299,7 +303,8 @@ function setDonationAmount(amount){
     let donationAmount = document.querySelector("#donationAmount")
     switch(amount) {
         case 'custom':
-            customAmount.classList.remove("is-hidden")
+            customAmount.classList.remove("is-hidden");
+            document.querySelector("#customAmountInput").focus();
             customDonation = true
             break;
         default:
